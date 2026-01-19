@@ -1,0 +1,81 @@
+.raspberry {
+    width: 1400px;
+    margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  padding-bottom: 120px;
+}
+
+.raspberry-hero img {
+  width: 1400px;
+  height: 520px;
+  object-fit: cover;
+}
+.raspberry-info {
+  width: 72%;
+  margin: -120px auto 100px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 50px 60px;
+  display: flex;
+  gap: 60px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+}
+
+.info-left h1 {
+  font-size: 34px;
+  margin-bottom: 16px;
+  color: #1f2933;
+}
+
+.info-left p {
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.info-right p {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.info-right span {
+  font-weight: 600;
+  color: #1f2933;
+}
+
+.raspberry-body {
+  width: 55%;
+  margin: 0 auto;
+}
+
+.raspberry-body img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.caption {
+  display: block;
+  text-align: center;
+  margin: 12px 0 50px;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.raspberry-body h3 {
+    font-weight: 900;
+  font-size: 22px;
+  margin: 40px 0 14px;
+  color: #1f2933;
+}
+
+.raspberry-body p {
+  color: #6b7280;
+  line-height: 1.8;
+  transition: color 0.3s ease;
+}
+
+.raspberry-body p:hover {
+  color: #1f2933;
+}

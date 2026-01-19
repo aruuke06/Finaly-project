@@ -1,0 +1,112 @@
+.zoo {
+margin-top: -100px;
+    width: 1400px;
+  padding: 100px 0;
+  background: #fff;
+}
+
+.lion {
+  position: relative;
+  text-align: center;
+}
+
+.lion img {
+  width: 100%;
+  border-radius: 30px;
+}
+
+.lion h1 {
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  color: #274c5b;
+}
+
+.owl {
+  text-align: center;
+  max-width: 700px;
+  margin: 100px auto 60px;
+}
+
+.owl span {
+  color: #7eb693;
+  font-style: italic;
+}
+
+.owl h2 {
+  font-size: 40px;
+  color: #274c5b;
+  margin: 10px 0;
+}
+
+.owl p {
+  color: #525c60;
+}
+
+.herd {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.fox {
+  background: #f9f8f8;
+  border-radius: 30px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s;
+  text-decoration: none;
+}
+
+.fox:hover {
+  transform: translateY(-10px);
+}
+
+.fox img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.paw {
+  padding: 25px;
+  position: relative;
+}
+
+.paw h4 {
+  color: #274c5b;
+  margin-bottom: 5px;
+}
+
+.paw span {
+  color: #7eb693;
+  font-size: 14px;
+}
+
+
+.claws {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.fox:hover .claws {
+  opacity: 1;
+}
+
+.claws svg {
+  background: #7eb693;
+  color: #fff;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 30px;
+}

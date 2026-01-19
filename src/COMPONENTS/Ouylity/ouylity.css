@@ -1,0 +1,155 @@
+.quality {
+  width: 100%;
+  padding-bottom: 120px;
+  font-family: "Inter", sans-serif;
+}
+
+.quality-banner {
+  position: relative;
+}
+
+.quality-banner img {
+  width: 1400px;
+  display: block;
+}
+
+.quality-banner h1 {
+  position: absolute;
+  inset: 0;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  color: #2f3e46;
+}
+
+.quality-main {
+  width: 80%;
+  margin: 100px auto;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.quality-main img {
+  width: 55%;
+  border-radius: 20px;
+  transition: transform 0.6s ease;
+}
+
+.quality-main img:hover {
+  transform: scale(1.03);
+}
+
+.quality-text h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.quality-text p {
+  color: #6c757d;
+  line-height: 1.7;
+}
+
+.quality-cards {
+  width: 80%;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.quality-card {
+  display: flex;
+  gap: 40px;
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 30px;
+  transition: all 0.4s ease;
+}
+
+.quality-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.quality-card img {
+  width: 220px;
+  border-radius: 16px;
+}
+
+.quality-card:hover {
+  background: #ffffff;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+}
+
+.quality-card h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.quality-card p {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+/* Bottom */
+.quality-bottom {
+  width: 50%;
+  margin: 100px auto;
+  text-align: center;
+}
+
+.quality-bottom h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.quality-bottom p {
+  color: #6c757d;
+  line-height: 1.7;
+}
+
+/* Actions */
+.quality-actions {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.quality-actions button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 32px;
+  border-radius: 50px;
+  border: none;
+  background: #e9f5ec;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.quality-actions .num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #7eb693;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quality-actions button:hover {
+  background: #7eb693;
+  color: white;
+  transform: translateY(-6px);
+}
+
+.quality-actions button:hover .num {
+  background: white;
+  color: #7eb693;
+}

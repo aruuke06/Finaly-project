@@ -1,0 +1,117 @@
+.header {
+  width: 1400px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  z-index: 1000;
+
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.8);
+
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* <--- добавили чёткую линию */
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  width: 55px;
+  height: 55px;
+}
+
+.logo h2 {
+  font-size: 28px;
+  color: #2a2a2a;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* НАВИГАЦИЯ */
+.nav {
+  display: flex;
+  gap: 35px;
+}
+
+.nav a {
+  position: relative;
+  text-decoration: none;
+  font-size: 19px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+/* Подчеркивание на hover */
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #34a853;
+  transition: 0.35s ease;
+}
+
+.nav a:hover {
+  color: #34a853;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* ИКОНКИ СПРАВА */
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.icons a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 17px;
+  color: #333;
+  transition: 0.3s;
+}
+
+/* Иконки */
+.icon {
+  font-size: 32px;
+  transition: 0.3s ease;
+}
+
+/* Hover анимация */
+.icon:hover {
+  transform: translateY(-4px);
+  color: #34a853;
+}
+
+/* Текст Registration рядом с иконкой */
+.icons a span {
+  font-size: 17px;
+}
+
+/* ЭФФЕКТ ПРИ НАЖАТИИ */
+.icon:active {
+  transform: scale(0.9);
+}
