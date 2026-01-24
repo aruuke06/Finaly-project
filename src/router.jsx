@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "./COMPONENTS/LAYOUT/layout";
+import Layout from "./COMPONENTS/LAYOUT/Layout";
 
 import Ouylity from "./COMPONENTS/Ouylity/Ouylity";
 import Raspberry from "./COMPONENTS/Raspberry/Raspberry";

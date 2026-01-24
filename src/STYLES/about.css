@@ -1,7 +1,10 @@
 .about-hero {
   margin-top: 100px;
   position: relative;
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
   height: 350px;
   display: flex;
   justify-content: center;
@@ -55,6 +58,7 @@
 }
 
 .category-main-wrapper {
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -117,4 +121,105 @@
 .three-box:hover .three-text {
   background: rgba(0,0,0,0.65);
   padding: 10px 26px;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .about-hero {
+    height: 300px;
+    margin-top: 80px;
+  }
+
+  .hero-title {
+    font-size: 48px;
+    padding: 0 20px;
+  }
+
+  .shop-categories {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .three-box-wrapper {
+    gap: 25px;
+  }
+
+  .three-box {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    height: 250px;
+    margin-top: 80px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+
+  .shop-categories {
+    gap: 15px;
+    margin: 30px auto;
+  }
+
+  .cat-btn {
+    padding: 10px 24px;
+    font-size: 16px;
+  }
+
+  .category-main-wrapper {
+    padding: 30px 15px;
+  }
+
+  .three-box-wrapper {
+    gap: 20px;
+  }
+
+  .three-box {
+    height: 240px;
+  }
+
+  .three-text {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    height: 200px;
+    margin-top: 70px;
+  }
+
+  .hero-title {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+
+  .shop-categories {
+    gap: 12px;
+    margin: 25px auto;
+  }
+
+  .cat-btn {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+
+  .category-main-wrapper {
+    padding: 25px 12px;
+  }
+
+  .three-box {
+    height: 220px;
+  }
+
+  .three-text {
+    font-size: 20px;
+    bottom: 15px;
+  }
 }

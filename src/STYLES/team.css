@@ -1,6 +1,9 @@
 .zoo {
-    width: 1400px;
-  padding: 100px 0;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px 20px;
   background: #fff;
 }
 
@@ -108,4 +111,79 @@
   padding: 8px;
   border-radius: 50%;
   font-size: 30px;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .zoo {
+    padding: 80px 15px;
+  }
+
+  .lion h1 {
+    font-size: 42px;
+  }
+
+  .owl {
+    margin: 80px auto 50px;
+    padding: 0 20px;
+  }
+
+  .owl h2 {
+    font-size: 36px;
+  }
+
+  .herd {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .zoo {
+    padding: 60px 15px;
+  }
+
+  .lion h1 {
+    font-size: 32px;
+    padding: 0 20px;
+  }
+
+  .owl {
+    margin: 60px auto 40px;
+  }
+
+  .owl h2 {
+    font-size: 28px;
+  }
+
+  .herd {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .fox img {
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .zoo {
+    padding: 50px 12px;
+  }
+
+  .lion h1 {
+    font-size: 24px;
+  }
+
+  .owl h2 {
+    font-size: 24px;
+  }
+
+  .fox img {
+    height: 240px;
+  }
+
+  .paw {
+    padding: 20px;
+  }
 }

@@ -1,4 +1,5 @@
 .breakfast-page {
+  width: 100%;
   max-width: 1200px;
   margin: auto;
   padding: 40px 20px;
@@ -92,4 +93,59 @@ button {
 .recipe-wrapper.open .recipe-box {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .breakfast-page {
+    padding: 40px 15px;
+  }
+
+  .breakfast-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .breakfast-page {
+    padding: 30px 15px;
+  }
+
+  .title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .breakfast-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breakfast-page {
+    padding: 20px 12px;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card-img {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
 }

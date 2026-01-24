@@ -1,10 +1,12 @@
 .footer {
   background: #fff;
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
-/* Newsletter */
+
 .newsletter {
   position: relative;
   max-width: 1200px;
@@ -24,6 +26,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 80px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .newsletter-content h2 {
@@ -33,7 +37,7 @@
   line-height: 1.2;
 }
 
-/* Form */
+
 .newsletter-form {
   display: flex;
   gap: 12px;
@@ -58,7 +62,7 @@
   cursor: pointer;
 }
 
-/* Footer content */
+
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -87,7 +91,7 @@
   padding: 0;
 }
 
-/* Center */
+
 .footer-center {
   text-align: center;
 }
@@ -118,11 +122,107 @@
   color: #274c5b;
 }
 
-/* Bottom */
+
 .footer-bottom {
   text-align: center;
   padding: 20px 0;
   border-top: 1px solid #e0e0e0;
   color: #525c60;
   font-size: 14px;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 0 15px;
+  }
+
+  .newsletter-content {
+    padding: 0 50px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 32px;
+  }
+
+  .newsletter-form input {
+    width: 240px;
+  }
+
+  .footer-content {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0 15px;
+  }
+
+  .newsletter {
+    margin-bottom: 60px;
+  }
+
+  .newsletter-content {
+    position: relative;
+    padding: 40px 30px;
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 28px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .newsletter-form input {
+    width: 100%;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .footer-col {
+    text-align: center;
+  }
+
+  .footer-center {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 0 12px;
+  }
+
+  .newsletter-content {
+    padding: 30px 20px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 24px;
+  }
+
+  .footer-content {
+    gap: 30px;
+    padding-bottom: 40px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    padding: 15px 10px;
+  }
 }

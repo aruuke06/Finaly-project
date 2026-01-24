@@ -9,8 +9,10 @@
 }
 
 .quality-banner img {
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
   display: block;
+  margin: 0 auto;
 }
 
 .quality-banner h1 {
@@ -152,4 +154,124 @@
 .quality-actions button:hover .num {
   background: white;
   color: #7eb693;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .quality-banner h1 {
+    font-size: 36px;
+    padding: 0 20px;
+  }
+
+  .quality-main {
+    width: 90%;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .quality-main img {
+    width: 100%;
+  }
+
+  .quality-cards {
+    width: 90%;
+  }
+
+  .quality-bottom {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .quality {
+    padding-bottom: 80px;
+  }
+
+  .quality-banner h1 {
+    font-size: 28px;
+  }
+
+  .quality-main {
+    width: 95%;
+    margin: 60px auto;
+    gap: 30px;
+  }
+
+  .quality-text h2 {
+    font-size: 28px;
+  }
+
+  .quality-cards {
+    width: 95%;
+    margin: 60px auto;
+    gap: 30px;
+  }
+
+  .quality-card {
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px;
+  }
+
+  .quality-card.reverse {
+    flex-direction: column;
+  }
+
+  .quality-card img {
+    width: 100%;
+  }
+
+  .quality-bottom {
+    width: 90%;
+    margin: 60px auto;
+  }
+
+  .quality-bottom h3 {
+    font-size: 24px;
+  }
+
+  .quality-actions {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .quality-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .quality {
+    padding-bottom: 60px;
+  }
+
+  .quality-banner h1 {
+    font-size: 24px;
+  }
+
+  .quality-main {
+    margin: 40px auto;
+  }
+
+  .quality-text h2 {
+    font-size: 24px;
+  }
+
+  .quality-cards {
+    margin: 40px auto;
+    gap: 25px;
+  }
+
+  .quality-card {
+    padding: 20px;
+  }
+
+  .quality-bottom {
+    margin: 40px auto;
+  }
+
+  .quality-bottom h3 {
+    font-size: 20px;
+  }
 }
