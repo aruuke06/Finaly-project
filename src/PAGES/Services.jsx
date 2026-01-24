@@ -17,22 +17,18 @@ function Services() {
   return (
     <section className="services">
 
-      {/* Banner */}
       <div className="services-header">
         <img src={ser1} alt="" />
         <h1>Services</h1>
       </div>
 
-      {/* Title */}
       <div className="services-title">
         <h4>What we Grow</h4>
         <h2>Better Agriculture for <br /> Better Future</h2>
       </div>
 
-      {/* GRID 3 — CENTER — 3 */}
       <div className="services-grid">
 
-        {/* LEFT COLUMN */}
         <div className="left-column">
           <div className="service-card">
             <img src={ser3} alt="" />
@@ -53,12 +49,10 @@ function Services() {
           </div>
         </div>
 
-        {/* CENTER BANNER */}
         <div className="services-banner">
           <img src={ser2} alt="banner" />
         </div>
 
-        {/* RIGHT COLUMN */}
         <div className="right-column">
           <Link to="/ouylity" className="service-card">
             <img src={ser6} alt="" />
@@ -83,7 +77,6 @@ function Services() {
 
       </div>
 
-      {/* Video */}
       <div className="services-video">
         {!play && (
           <div className="video-overlay" onClick={() => setPlay(true)}>

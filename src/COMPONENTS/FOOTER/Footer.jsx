@@ -34,9 +34,9 @@ function Footer() {
       <div className="footer-content">
         <div className="footer-col">
           <h3>Contact Us</h3>
-          <p><span>Email:</span> needhelp@Organia.com</p>
-          <p><span>Phone:</span> 666 888 888</p>
-          <p><span>Address:</span> 88 road, borklyn street, USA</p>
+          <p><span>Email:</span></p>
+          <p><span>Whatsapp:</span> +996 550219237</p>
+          <p><span>Address:</span>Turusbekova 109/1</p>
         </div>
 
         <div className="footer-center">

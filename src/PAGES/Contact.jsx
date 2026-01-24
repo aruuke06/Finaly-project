@@ -1,110 +1,157 @@
-import React from "react";
+import React, { useState } from "react";
 import "../STYLES/contacts.css";
-
-import { IoIosMail } from "react-icons/io";
-import { MdAddCall } from "react-icons/md";
-import { FaTelegram, FaInstagram, FaPinterest } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6";
-
-import contact from "../SVG/contact.svg";
-import contact1 from "../SVG/contact1.svg";
-import contact2 from "../SVG/contact2.svg";
-
-import { handleSubmit, sendEmail, callPhone } from "../REDUX/contactt";
+import { FaMapMarkerAlt, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    alert("✅ Message sent successfully! We will contact you soon.");
+
+    setFormData({
+      name: "",
+      company: "",
+      phone: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+  };
+
   return (
-    <section className="contact">
-    
-      <div className="contact-header">
-        <img src={contact} alt="contact" />
-        <h1>Contact Us</h1>
-      </div>
+    <div className="contact-wrapper">
+      <div className="contact-card">
 
-      <div className="contact-info">
-        <img src={contact1} alt="info" />
-        <div>
-          <h2>We'd love to talk about how we can work together.</h2>
-          <p>
-            Simply dummy text of the printing and typesetting industry. Lorem
-            had ceased to been the industry's standard dummy text ever since
-            the 1500s, when an unknown printer took a galley.
+        <div className="contact-left">
+          <h2>Get in Touch</h2>
+          <p className="contact-desc">
+            Feel free to reach out to us anytime. We are happy to assist you.
           </p>
 
-          <button onClick={sendEmail}>
-            <IoIosMail /> Message: zozobekovaaruuke58@gmail.com
-          </button>
-
-          <button onClick={callPhone}>
-            <MdAddCall /> Contact Us <span>+996550219237</span>
-          </button>
-
-          <div className="socials">
-            <FaTelegram />
-            <FaWhatsapp />
-            <FaInstagram />
-            <FaPinterest />
+          <div className="info-box">
+            <FaMapMarkerAlt className="info-icon" />
+            <div>
+              <p>Turusbekova 109/1</p>
+              <p>Bishkek, Kyrgyzstan</p>
+            </div>
           </div>
+
+ъ          <div className="info-box">
+            <FaEnvelope className="info-icon" />
+            <div>
+              <h4>Email Us</h4>
+              <a
+                href="mailto:zozobekovaaruuke58@gmail.com"
+                className="contact-link"
+              >
+                zozobekovaaruuke58@gmail.com
+              </a>
+            </div>
+          </div>
+
+          <div className="info-box">
+            <FaPhoneAlt className="info-icon" />
+            <div>
+              <h4>Call / WhatsApp</h4>
+              <a
+                href="https://wa.me/996550219237"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-link"
+              >
+                +996 550 219 237
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="contact-right">
+          <h2>Send Us a Message</h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-row">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                name="company"
+                placeholder="Company"
+                value={formData.company}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              className="subject-input"
+              value={formData.subject}
+              onChange={handleChange}
+            />
+
+            <textarea
+              className="message-box"
+              name="message"
+              placeholder="Message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            ></textarea>
+
+            <button className="send-btn" type="submit">
+              Send
+            </button>
+          </form>
         </div>
       </div>
 
-      <div className="contact-location">
-        <img src={contact2} alt="location" />
-        <div className="location-card">
-          <p>Location</p>
-          <h3>Our Farms</h3>
-          <p>
-            Established fact that a reader will be distracted by the readable
-            content of a page when looking a layout. The point of using.
-          </p>
-
-          <h4>
-            New York, USA
-            <span>299 Park Avenue New York, New York 10171</span>
-          </h4>
-
-          <h4>
-            London, UK
-            <span>30 Stamford Street, London SE1 9LQ</span>
-          </h4>
-        </div>
+      <div className="map-section">
+        <iframe
+          title="map"
+          src="https://www.google.com/maps?q=Turusbekova+109%2F1+Bishkek+Kyrgyzstan&output=embed"
+          loading="lazy"
+        ></iframe>
       </div>
-
-      <form id="contactForm" className="contact-form" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div>
-            <label>Full Name*</label>
-            <input id="fullName" name="fullName" type="text" placeholder="Your Full Name" />
-          </div>
-
-          <div>
-            <label>Your Email*</label>
-            <input id="email" name="email" type="email" placeholder="example@gmail.com" />
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div>
-            <label>Company*</label>
-            <input id="company" name="company" type="text" placeholder="Your company name" />
-          </div>
-
-          <div>
-            <label>Subject*</label>
-            <input id="subject" name="subject" type="text" placeholder="How can we help?" />
-          </div>
-        </div>
-
-        <div>
-          <label>Message*</label>
-          <textarea id="message" name="message" placeholder="Hello, I would like to talk about..."></textarea>
-        </div>
-
-        <button type="submit">Send Message</button>
-      </form>
-    </section>
+    </div>
   );
 }
 
 export default Contact;
-

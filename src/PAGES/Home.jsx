@@ -1,10 +1,5 @@
 import React from "react";
 import "../STYLES/home.css";
-import "../COMPONENTS/Homemain/Homemain"
-import "../COMPONENTS/Homeban/Homeban"
-
-
-
 
 import home from "../SVG/home.svg";
 import home1 from "../SVG/home1.svg";
@@ -12,13 +7,9 @@ import home2 from "../SVG/home2.svg";
 import home3 from "../SVG/home3.svg";
 import or from "../SVG/or.svg";
 import or1 from "../SVG/or1.svg";
+
 import Homemain from "../COMPONENTS/Homemain/Homemain";
 import Homeban from "../COMPONENTS/Homeban/Homeban";
-
-
-
-
-
 
 function Home() {
   return (
@@ -29,13 +20,11 @@ function Home() {
 
         <div className="hero-text">
           <span>100% 𝑁𝑎𝑡𝑢𝑟𝑎𝑙 𝐹𝑜𝑜𝑑</span>
-
           <h1>
             Choose the best <br />
             healthier way <br />
             of life
           </h1>
-
           <button>Explore Now</button>
         </div>
       </section>
@@ -79,16 +68,13 @@ function Home() {
           </p>
 
           <div className="about-list">
-
             <div className="about-item">
               <div className="about-icon">
                 <img src={or} alt="" />
               </div>
               <div>
                 <h4>Organic Foods Only</h4>
-                <p>
-                  Simply dummy text of the printing and typesetting industry.
-                </p>
+                <p>Simply dummy text of the printing industry.</p>
               </div>
             </div>
 
@@ -98,23 +84,18 @@ function Home() {
               </div>
               <div>
                 <h4>Quality Standards</h4>
-                <p>
-                  Simply dummy text of the printing and typesetting industry.
-                </p>
+                <p>Simply dummy text of the printing industry.</p>
               </div>
             </div>
-
           </div>
 
           <button className="about-btn">Shop Now</button>
         </div>
-            
+      </section>
 
-            <div> <Homemain/></div>
+      <Homemain />
+      <Homeban />
 
-           <div> <Homeban/> </div>
-
-</section>
     </main>
   );
 }
