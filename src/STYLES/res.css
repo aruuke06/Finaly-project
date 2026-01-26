@@ -7,7 +7,8 @@
   background: #eef4ff; }
 
 .login-box {
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
   padding: 26px;
   background: #fff;
   border-radius: 16px;
@@ -51,7 +52,7 @@
   border-radius: 10px;
   border: 1px solid #c9d8ff;
   margin-top: 6px;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
 }
 
@@ -162,4 +163,107 @@
   color: #2d7ff9;
   text-decoration: none;
   font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-box {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 15px;
+  }
+
+  .login-box {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .input-group label {
+    font-size: 13px;
+  }
+
+  .login-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .social-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .login-container {
+    padding: 12px;
+  }
+
+  .login-box {
+    padding: 18px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .input-group {
+    margin-bottom: 12px;
+  }
+
+  .input-group label {
+    font-size: 12px;
+  }
+
+  .input-group input {
+    padding: 12px;
+  }
+
+  .remember-row {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+
+  .forgot {
+    font-size: 12px;
+  }
+
+  .login-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .social-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .divider span {
+    font-size: 12px;
+  }
+
+  .bottom-text {
+    font-size: 12px;
+  }
 }

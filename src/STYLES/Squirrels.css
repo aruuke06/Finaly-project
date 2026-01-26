@@ -97,3 +97,128 @@
     font-size: 1.1rem;
 }
 
+@media (max-width: 1024px) {
+  .protein-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .protein-info {
+    width: 95%;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .protein-section {
+    padding: 20px;
+  }
+
+  .protein-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .protein-info {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .protein-info h2 {
+    font-size: 24px;
+  }
+
+  .protein-card {
+    padding: 12px;
+  }
+
+  .protein-card img {
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .protein-section {
+    padding: 15px;
+  }
+
+  .protein-grid {
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .protein-info {
+    padding: 12px;
+    margin-bottom: 30px;
+  }
+
+  .protein-info h2 {
+    font-size: 20px;
+  }
+
+  .protein-info h3 {
+    font-size: 16px;
+  }
+
+  .protein-info p {
+    font-size: 14px;
+  }
+
+  .protein-card {
+    padding: 10px;
+  }
+
+  .protein-card img {
+    height: 120px;
+  }
+
+  .protein-card h5 {
+    font-size: 16px;
+  }
+
+  .protein-card h6 {
+    font-size: 14px;
+  }
+
+  .add-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .read-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 375px) {
+  .protein-section {
+    padding: 12px;
+  }
+
+  .protein-info h2 {
+    font-size: 18px;
+  }
+
+  .protein-info h3 {
+    font-size: 15px;
+  }
+
+  .protein-info p {
+    font-size: 13px;
+  }
+
+  .protein-card h5 {
+    font-size: 15px;
+  }
+
+  .protein-card h6 {
+    font-size: 13px;
+  }
+
+  .add-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+

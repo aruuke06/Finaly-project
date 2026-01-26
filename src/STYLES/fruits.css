@@ -83,3 +83,75 @@ button:hover {
   font-size: 14px;
   color: #555;
 }
+
+@media (max-width: 1024px) {
+  .breakfast-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .breakfast-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .breakfast-grid {
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card-img {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+
+  .price {
+    font-size: 15px;
+  }
+
+  button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .breakfast-grid {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .card-img {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 15px;
+  }
+}
