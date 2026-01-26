@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 
@@ -8,6 +9,37 @@ import { CgProfile } from "react-icons/cg";
 import list from "../../SVG/list.svg";
 
 export default function Header() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const closeDrawer = () => setIsDrawerOpen(false);
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+
+  // Close drawer on ESC key
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape" && isDrawerOpen) closeDrawer();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isDrawerOpen]);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isDrawerOpen]);
+
+  // Close drawer when clicking a nav link
+  const handleNavClick = () => {
+    closeDrawer();
+  };
+
   return (
     <header className="header">
       <div className="header-inner">
@@ -18,13 +50,13 @@ export default function Header() {
         </div>
 
         
-        <nav className="nav">
-          <NavLink to="/home">Home</NavLink>
-          <NavLink to="/category">Category</NavLink>
-          <NavLink to="/shop">Shop</NavLink>
-          <NavLink to="/services">Services</NavLink>
-          <NavLink to="/team">Team</NavLink>
-          <NavLink to="/contact">Contact</NavLink>
+        <nav className="header-nav">
+          <NavLink to="/home" onClick={handleNavClick}>Home</NavLink>
+          <NavLink to="/category" onClick={handleNavClick}>Category</NavLink>
+          <NavLink to="/shop" onClick={handleNavClick}>Shop</NavLink>
+          <NavLink to="/services" onClick={handleNavClick}>Services</NavLink>
+          <NavLink to="/team" onClick={handleNavClick}>Team</NavLink>
+          <NavLink to="/contact" onClick={handleNavClick}>Contact</NavLink>
         </nav>
 
         {/* ИКОНКИ */}
@@ -43,7 +75,48 @@ export default function Header() {
           </NavLink>
         </div>
 
+        {/* Burger Button - Mobile Only */}
+        <button
+          className="burger-btn"
+          onClick={toggleDrawer}
+          aria-expanded={isDrawerOpen}
+          aria-controls="mobile-drawer"
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
       </div>
+
+      {/* Overlay */}
+      {isDrawerOpen && (
+        <div className="drawer-overlay" onClick={closeDrawer} aria-hidden="true"></div>
+      )}
+
+      {/* Mobile Drawer */}
+      <nav
+        id="mobile-drawer"
+        className={`mobile-drawer ${isDrawerOpen ? "open" : ""}`}
+        aria-label="Mobile navigation"
+      >
+        <button
+          className="drawer-close"
+          onClick={closeDrawer}
+          aria-label="Close navigation menu"
+        >
+          ×
+        </button>
+        <div className="drawer-nav">
+          <NavLink to="/home" onClick={handleNavClick}>Home</NavLink>
+          <NavLink to="/category" onClick={handleNavClick}>Category</NavLink>
+          <NavLink to="/shop" onClick={handleNavClick}>Shop</NavLink>
+          <NavLink to="/services" onClick={handleNavClick}>Services</NavLink>
+          <NavLink to="/team" onClick={handleNavClick}>Team</NavLink>
+          <NavLink to="/contact" onClick={handleNavClick}>Contact</NavLink>
+        </div>
+      </nav>
     </header>
   );
 }

@@ -158,12 +158,16 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-} 
+ } 
  */
 
  .home {
   margin-top: 100px;
-  width: 1400px;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
   font-family: "Poppins", sans-serif;
 }
 
@@ -186,6 +190,7 @@
   left: 90px;
   transform: translateY(-50%);
   max-width: 420px;
+  padding: 0 20px;
 }
 
 .hero-text span {
@@ -335,5 +340,136 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .home {
+    padding: 0 15px;
+  }
+
+  .hero-text {
+    left: 50px;
+    max-width: 380px;
+  }
+
+  .hero-text h1 {
+    font-size: 48px;
+  }
+
+  .banners {
+    gap: 20px;
+  }
+
+  .about-bn {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    margin-top: 80px;
+    padding: 0 15px;
+  }
+
+  .hero {
+    margin-bottom: 50px;
+  }
+
+  .hero-text {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    max-width: 100%;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 36px;
+  }
+
+  .hero-text span {
+    font-size: 14px;
+  }
+
+  .hero-text button {
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+
+  .banners {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .banner-text {
+    left: 30px;
+  }
+
+  .banner-text h3 {
+    font-size: 28px;
+  }
+
+  .about-bn {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .about-text h2 {
+    font-size: 32px;
+  }
+
+  .about-item {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    margin-top: 70px;
+    padding: 0 12px;
+  }
+
+  .hero-text {
+    padding: 20px 15px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+    margin: 10px 0 20px;
+  }
+
+  .hero-text span {
+    font-size: 13px;
+  }
+
+  .banner-text {
+    left: 20px;
+  }
+
+  .banner-text h3 {
+    font-size: 24px;
+  }
+
+  .banner-text span {
+    font-size: 14px;
+  }
+
+  .about-text h2 {
+    font-size: 26px;
+  }
+
+  .about-text p {
+    font-size: 14px;
+  }
+
+  .about-btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
 }
 

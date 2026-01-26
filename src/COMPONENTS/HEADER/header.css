@@ -1,15 +1,15 @@
 .header {
-  width: 1400px;
+  width: 100%;
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
 
   backdrop-filter: blur(18px);
   background: rgba(255, 255, 255, 0.8);
 
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1); /* <--- добавили чёткую линию */
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.08);
 }
 
@@ -43,12 +43,12 @@
 }
 
 /* НАВИГАЦИЯ */
-.nav {
+.header-nav {
   display: flex;
   gap: 35px;
 }
 
-.nav a {
+.header-nav a {
   position: relative;
   text-decoration: none;
   font-size: 19px;
@@ -58,7 +58,7 @@
 }
 
 /* Подчеркивание на hover */
-.nav a::after {
+.header-nav a::after {
   content: "";
   position: absolute;
   bottom: -6px;
@@ -69,11 +69,11 @@
   transition: 0.35s ease;
 }
 
-.nav a:hover {
+.header-nav a:hover {
   color: #34a853;
 }
 
-.nav a:hover::after {
+.header-nav a:hover::after {
   width: 100%;
 }
 
@@ -114,4 +114,214 @@
 /* ЭФФЕКТ ПРИ НАЖАТИИ */
 .icon:active {
   transform: scale(0.9);
+}
+
+/* BURGER BUTTON */
+.burger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  gap: 5px;
+}
+
+.burger-btn span {
+  width: 100%;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.burger-btn:hover span {
+  background: #34a853;
+}
+
+.burger-btn:focus-visible {
+  outline: 2px solid #34a853;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.burger-btn[aria-expanded="true"] span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.burger-btn[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger-btn[aria-expanded="true"] span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* DRAWER OVERLAY */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  backdrop-filter: blur(2px);
+}
+
+/* MOBILE DRAWER */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #fff;
+  z-index: 1002;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-close {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  font-size: 36px;
+  color: #333;
+  cursor: pointer;
+  padding: 15px 20px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.drawer-close:hover {
+  color: #34a853;
+}
+
+.drawer-close:focus-visible {
+  outline: 2px solid #34a853;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 0;
+}
+
+.drawer-nav a {
+  display: block;
+  padding: 18px 25px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.drawer-nav a:hover,
+.drawer-nav a:focus-visible {
+  background: #f9f9f9;
+  color: #34a853;
+  padding-left: 30px;
+}
+
+.drawer-nav a:focus-visible {
+  outline: 2px solid #34a853;
+  outline-offset: -2px;
+}
+
+/* RESPONSIVE STYLES */
+@media (max-width: 1024px) {
+  .header-inner {
+    padding: 0 20px;
+  }
+
+  .header-nav {
+    gap: 25px;
+  }
+
+  .header-nav a {
+    font-size: 17px;
+  }
+
+  .icons {
+    gap: 20px;
+  }
+
+  .icons a span {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    height: 80px;
+    padding: 0 15px;
+  }
+
+  .logo img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .logo h2 {
+    font-size: 24px;
+  }
+
+  .header-nav {
+    display: none !important;
+  }
+
+  .burger-btn {
+    display: flex !important;
+  }
+
+  .icons {
+    gap: 15px;
+  }
+
+  .icon {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner {
+    height: 70px;
+    padding: 0 12px;
+  }
+
+  .logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo h2 {
+    font-size: 20px;
+  }
+
+  .icons {
+    gap: 12px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
 }
