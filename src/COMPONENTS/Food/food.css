@@ -99,7 +99,6 @@
   margin-bottom: 12px;
 }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 1024px) {
   .food {
     padding-left: 15px;

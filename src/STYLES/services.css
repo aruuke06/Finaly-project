@@ -142,7 +142,6 @@
   color: white;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 1024px) {
   .services {
     padding: 60px 15px;

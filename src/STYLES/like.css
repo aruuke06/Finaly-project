@@ -18,7 +18,6 @@
   transform: translateY(-6px);
 }
 
-/* 🔝 header */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -70,7 +69,6 @@
   margin-bottom: 14px;
 }
 
-/* 🛒 кнопка */
 .add-btn {
   width: 100%;
   background: linear-gradient(135deg, #4caf50, #2e7d32);

@@ -9,8 +9,6 @@
   font-family: "Poppins", sans-serif;
 }
 
-
-
 .shop-hero {
   position: relative;
   width: 100%;
@@ -103,7 +101,6 @@
   align-items: center;
 }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 1024px) {
   .shop-page {
     padding: 140px 15px 40px;

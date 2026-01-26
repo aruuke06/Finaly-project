@@ -32,7 +32,6 @@ function Homeban() {
         </div>
       </section>
 
-      {/* ===== News ===== */}
       <section className="news">
         <div className="container">
           <div className="news-head">

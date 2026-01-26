@@ -129,7 +129,6 @@
   font-size: 30px;
 }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 1024px) {
   .zoo {
     padding: 80px 15px;

@@ -83,7 +83,6 @@
   color: #1f2933;
 }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 1024px) {
   .raspberry {
     padding-left: 15px;

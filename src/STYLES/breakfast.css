@@ -15,7 +15,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 25px;
-  align-items: start; /* карточки НЕ растягиваются */
+  align-items: start; 
 }
 
 .card {
@@ -45,7 +45,6 @@
   margin: 6px 0 10px;
 }
 
-/* кнопки */
 button {
   width: 100%;
   border: none;
@@ -56,14 +55,12 @@ button {
   cursor: pointer;
 }
 
-/* Add to cart button */
 .cart-btn {
   background: #3c8c2e;
   color: white;
   font-weight: 600;
 }
 
-/* скрытое состояние — БЕЗ пустоты */
 .recipe-wrapper {
   max-height: 0;
   overflow: hidden;
@@ -72,11 +69,9 @@ button {
   padding: 0;
 }
 
-/* открытое состояние */
 .recipe-wrapper.open {
   max-height: 600px;
-  margin-top: 10px; /* появляется только при открытии */
-}
+      margin-top: 10px;}
 
 .recipe-box {
   background: #fff;
@@ -95,7 +90,6 @@ button {
   transform: translateY(0);
 }
 
-/* RESPONSIVE STYLES */
 @media (max-width: 1024px) {
   .breakfast-page {
     padding: 40px 15px;
