@@ -1,12 +1,15 @@
 .zoo {
-    width: 1400px;
-  padding: 100px 0;
+  max-width: 1400px;
+  margin: auto;
+  padding: 100px 20px;
   background: #fff;
 }
+
 
 .lion {
   position: relative;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 .lion img {
@@ -17,22 +20,25 @@
 .lion h1 {
   font-weight: 900;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 50px;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
   color: #274c5b;
 }
+
 
 .owl {
   text-align: center;
   max-width: 700px;
-  margin: 100px auto 60px;
+  margin: auto auto 70px;
 }
 
 .owl span {
   color: #7eb693;
   font-style: italic;
+  font-size: 18px;
 }
 
 .owl h2 {
@@ -43,34 +49,42 @@
 
 .owl p {
   color: #525c60;
+  line-height: 1.6;
 }
+
 
 .herd {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  max-width: 1200px;
-  margin: auto;
 }
+
 
 .fox {
   background: #f9f8f8;
   border-radius: 30px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.4s;
   text-decoration: none;
+  transition: .4s;
 }
 
 .fox:hover {
-  transform: translateY(-10px);
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .08);
 }
 
 .fox img {
   width: 100%;
   height: 320px;
   object-fit: cover;
+  transition: .4s;
 }
+
+.fox:hover img {
+  transform: scale(1.05);
+}
+
 
 .paw {
   padding: 25px;
@@ -79,7 +93,8 @@
 
 .paw h4 {
   color: #274c5b;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  font-size: 20px;
 }
 
 .paw span {
@@ -95,17 +110,25 @@
   display: flex;
   gap: 12px;
   opacity: 0;
-  transition: 0.3s;
+  transform: translateY(10px);
+  transition: .3s;
 }
 
 .fox:hover .claws {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .claws svg {
   background: #7eb693;
-  color: #fff;
-  padding: 8px;
+  color: white;
+  padding: 9px;
   border-radius: 50%;
-  font-size: 30px;
+  font-size: 28px;
+  transition: .3s;
+}
+
+.claws svg:hover {
+  background: #274c5b;
+  transform: scale(1.1);
 }

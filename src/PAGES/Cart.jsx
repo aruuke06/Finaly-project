@@ -44,7 +44,6 @@ export default function Cart() {
         <h2 className="cart-title">Shopping Cart</h2>
 
         <div className="cart-wrapper">
-          {/* LEFT */}
           <div className="cart-items">
             {items.map(item => (
               <div className="cart-card" key={item.id}>
@@ -71,7 +70,6 @@ export default function Cart() {
             ))}
           </div>
 
-          {/* RIGHT */}
           <div className="cart-summary">
             <h3>Order Summary</h3>
 
