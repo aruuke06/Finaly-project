@@ -4,7 +4,8 @@ import "./Homemain.css";
 import { GoArrowRight } from "react-icons/go";
 import { IoStarSharp } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
-import { FaCartShopping } from "react-icons/fa6";
+import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
 import dow from "../../SVG/dow.svg";
 import do1 from "../../SVG/do1.svg";
@@ -14,9 +15,28 @@ import bro2 from "../../SVG/bro2.svg";
 import bro3 from "../../SVG/bro3.svg";
 import bro4 from "../../SVG/bro4.svg";
 
+import {
+  toggleWishlistOptimistic,
+  setWishlistPending,
+  selectIsInWishlist,
+  selectWishlistPendingById,
+} from "../../store/wishlistSlice";
+
+import {
+  addOneOptimistic,
+  setCartPending,
+  selectQty,
+  selectInCart,
+  selectCartPendingById,
+} from "../../store/cartSlice";
+
 const products = [bro, bro1, bro2, bro3];
 
 function Homemain() {
+  const dispatch = useDispatch();
+  const wishlistPendingById = useSelector(selectWishlistPendingById);
+  const cartPendingById = useSelector(selectCartPendingById);
+
   return (
     <>
       <section
@@ -78,21 +98,75 @@ function Homemain() {
           </div>
 
           <div className="products">
-            {products.map((img, i) => (
-              <div className="product-card" key={i}>
-                <span className="tag">Vegetable</span>
-                <FaCartShopping className="cart" />
-                <img src={img} alt="product" />
-                <h6>Organic Product</h6>
-                <p>
-                  <span>$20.00</span> $13.00
-                </p>
-                <div className="rating">
-                  <CiStar /><CiStar /><CiStar />
-                  <CiStar /><CiStar />
+            {products.map((img, index) => {
+              const id = index;
+              const inWishlist = useSelector((state) =>
+                selectIsInWishlist(state, id)
+              );
+              const isWishlistPending = !!wishlistPendingById[id];
+
+              const inCart = useSelector((state) =>
+                selectInCart(state, id)
+              );
+              const qty = useSelector((state) => selectQty(state, id));
+              const cartPending = !!cartPendingById[id];
+
+              const handleWishlistClick = () => {
+                dispatch(setWishlistPending({ id, pending: true }));
+                dispatch(toggleWishlistOptimistic(id));
+                dispatch(setWishlistPending({ id, pending: false }));
+              };
+
+              const handleAddToCartClick = () => {
+                dispatch(setCartPending({ id, pending: "add" }));
+                dispatch(addOneOptimistic(id));
+                dispatch(setCartPending({ id, pending: null }));
+              };
+
+              return (
+                <div className="product-card" key={id}>
+                  <span className="tag">Vegetable</span>
+
+                  <button
+                    type="button"
+                    className="product-wishlist-btn"
+                    onClick={handleWishlistClick}
+                    disabled={isWishlistPending}
+                  >
+                    {inWishlist ? (
+                      <FaHeart className="product-wishlist-icon" />
+                    ) : (
+                      <FaRegHeart className="product-wishlist-icon" />
+                    )}
+                  </button>
+
+                  <img src={img} alt="product" />
+                  <h6>Organic Product</h6>
+                  <p>
+                    <span>$20.00</span> $13.00
+                  </p>
+                  <div className="rating">
+                    <CiStar /><CiStar /><CiStar />
+                    <CiStar /><CiStar />
+                  </div>
+
+                  <button
+                    type="button"
+                    className="product-cart-btn"
+                    onClick={handleAddToCartClick}
+                    disabled={cartPending}
+                  >
+                    <FaShoppingCart className="product-cart-icon" />
+                    {inCart ? "В корзине ✓" : "Добавить в корзину"}
+                    {inCart && qty > 1 && (
+                      <span className="product-cart-qty">
+                        x{qty}
+                      </span>
+                    )}
+                  </button>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
