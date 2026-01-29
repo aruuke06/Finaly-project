@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./COMPONENTS/LAYOUT/Layout";
+import AdminLayout from "./COMPONENTS/LAYOUT/AdminLayout";
 
 import Ouylity from "./COMPONENTS/Ouylity/Ouylity";
 import Raspberry from "./COMPONENTS/Raspberry/Raspberry";
@@ -22,6 +23,11 @@ import Like from "./PAGES/Like";
 import Squirrels from "./PAGES/Squirrels";
 import Fats from "./PAGES/Fats";
 import Carbohydrates from "./PAGES/Carbohydrates";
+import ProductsPage from "./PAGES/ProductsPage";
+import ProductFormPage from "./PAGES/ProductFormPage";
+import DashboardPage from "./PAGES/DashboardPage";
+import Checkout from "./PAGES/Checkout";
+import CheckoutSuccess from "./PAGES/CheckoutSuccess";
 
 const myRouter = createBrowserRouter([
   {
@@ -57,12 +63,24 @@ const myRouter = createBrowserRouter([
 
       { path: "team", element: <Team /> },
       { path: "cart", element: <Cart /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "checkout/success", element: <CheckoutSuccess /> },
       { path: "ouylity", element: <Ouylity /> },
       { path: "raspberry", element: <Raspberry /> },
       { path: "food", element: <Food /> },
       { path: "res", element: <Res /> },
       { path: "like", element: <Like /> },
       { path: "*", element: <Notfound /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <DashboardPage /> },
+      { path: "products", element: <ProductsPage /> },
+      { path: "products/new", element: <ProductFormPage /> },
+      { path: "products/:id/edit", element: <ProductFormPage /> },
     ],
   },
 ]);

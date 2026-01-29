@@ -1,26 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Homemain.css";
 
 import { GoArrowRight } from "react-icons/go";
 import { IoStarSharp } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import { FaHeart, FaRegHeart, FaShoppingCart } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 
 import dow from "../../SVG/dow.svg";
 import do1 from "../../SVG/do1.svg";
-import bro from "../../SVG/bro.svg";
-import bro1 from "../../SVG/bro1.svg";
-import bro2 from "../../SVG/bro2.svg";
-import bro3 from "../../SVG/bro3.svg";
 import bro4 from "../../SVG/bro4.svg";
 
 import {
-  toggleWishlistOptimistic,
-  setWishlistPending,
-  selectIsInWishlist,
-  selectWishlistPendingById,
-} from "../../store/wishlistSlice";
+  toggleWishlist,
+  selectWishlistIds,
+} from "../../features/wishlist/wishlistSlice";
 
 import {
   addOneOptimistic,
@@ -30,12 +24,25 @@ import {
   selectCartPendingById,
 } from "../../store/cartSlice";
 
-const products = [bro, bro1, bro2, bro3];
+import { fetchProducts } from "../../features/products/productsSlice";
 
 function Homemain() {
-  const dispatch = useDispatch();
-  const wishlistPendingById = useSelector(selectWishlistPendingById);
-  const cartPendingById = useSelector(selectCartPendingById);
+  const dispatch = useAppDispatch();
+  const { items: allProducts, loading, error } = useAppSelector(
+    (state) => state.products
+  );
+  const cartPendingById = useAppSelector(selectCartPendingById);
+
+  useEffect(() => {
+    if (allProducts.length === 0 && !loading) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, allProducts.length, loading]);
+
+  const products = allProducts.slice(0, 4);
+
+  const wishlistIds = useAppSelector(selectWishlistIds);
+  const cartState = useAppSelector((state) => state.cart);
 
   return (
     <>
@@ -97,77 +104,107 @@ function Homemain() {
             </button>
           </div>
 
-          <div className="products">
-            {products.map((img, index) => {
-              const id = index;
-              const inWishlist = useSelector((state) =>
-                selectIsInWishlist(state, id)
-              );
-              const isWishlistPending = !!wishlistPendingById[id];
+          {error && (
+            <div style={{ color: "red", marginBottom: "16px", textAlign: "center" }}>
+              Error loading products: {error}
+            </div>
+          )}
 
-              const inCart = useSelector((state) =>
-                selectInCart(state, id)
-              );
-              const qty = useSelector((state) => selectQty(state, id));
-              const cartPending = !!cartPendingById[id];
+          {loading && products.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
+              Loading products...
+            </div>
+          ) : (
+            <div className="products">
+              {products.map((product) => {
+                const id = Number(product.id);
+                const inWishlist = wishlistIds.includes(id);
 
-              const handleWishlistClick = () => {
-                dispatch(setWishlistPending({ id, pending: true }));
-                dispatch(toggleWishlistOptimistic(id));
-                dispatch(setWishlistPending({ id, pending: false }));
-              };
+                const inCart = !!cartState.itemsById[id];
+                const qty = cartState.itemsById[id]?.qty ?? 0;
+                const cartPending = !!cartPendingById[id];
 
-              const handleAddToCartClick = () => {
-                dispatch(setCartPending({ id, pending: "add" }));
-                dispatch(addOneOptimistic(id));
-                dispatch(setCartPending({ id, pending: null }));
-              };
+                const handleWishlistClick = () => {
+                  dispatch(toggleWishlist(id));
+                };
 
-              return (
-                <div className="product-card" key={id}>
-                  <span className="tag">Vegetable</span>
+                const handleAddToCartClick = () => {
+                  dispatch(setCartPending({ id, pending: "add" }));
+                  dispatch(addOneOptimistic(id));
+                  dispatch(setCartPending({ id, pending: null }));
+                };
 
-                  <button
-                    type="button"
-                    className="product-wishlist-btn"
-                    onClick={handleWishlistClick}
-                    disabled={isWishlistPending}
-                  >
-                    {inWishlist ? (
-                      <FaHeart className="product-wishlist-icon" />
+                return (
+                  <div className="product-card" key={id}>
+                    {product.category && (
+                      <span className="tag">{product.category}</span>
+                    )}
+
+                    <button
+                      type="button"
+                      className={`product-wishlist-btn ${inWishlist ? "active" : ""}`}
+                      onClick={handleWishlistClick}
+                    >
+                      {inWishlist ? (
+                        <FaHeart className="product-wishlist-icon" />
+                      ) : (
+                        <FaRegHeart className="product-wishlist-icon" />
+                      )}
+                    </button>
+
+                    {product.image ? (
+                      <img src={product.image} alt={product.title || "product"} />
                     ) : (
-                      <FaRegHeart className="product-wishlist-icon" />
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "220px",
+                          background: "#f0f0f0",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          color: "#999",
+                        }}
+                      >
+                        No image
+                      </div>
                     )}
-                  </button>
+                    <h6>{product.title || "Organic Product"}</h6>
+                    <p>
+                      {product.discount && (
+                        <span style={{ textDecoration: "line-through", color: "#b8b8b8", marginRight: "10px" }}>
+                          {product.discount}
+                        </span>
+                      )}
+                      {product.price || "$0.00"}
+                    </p>
+                    {product.rating && (
+                      <div className="rating">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <CiStar key={i} />
+                        ))}
+                      </div>
+                    )}
 
-                  <img src={img} alt="product" />
-                  <h6>Organic Product</h6>
-                  <p>
-                    <span>$20.00</span> $13.00
-                  </p>
-                  <div className="rating">
-                    <CiStar /><CiStar /><CiStar />
-                    <CiStar /><CiStar />
+                    <button
+                      type="button"
+                      className="product-cart-btn"
+                      onClick={handleAddToCartClick}
+                      disabled={cartPending}
+                    >
+                      <FaShoppingCart className="product-cart-icon" />
+                      {inCart ? "В корзине ✓" : "Добавить в корзину"}
+                      {inCart && qty > 1 && (
+                        <span className="product-cart-qty">
+                          x{qty}
+                        </span>
+                      )}
+                    </button>
                   </div>
-
-                  <button
-                    type="button"
-                    className="product-cart-btn"
-                    onClick={handleAddToCartClick}
-                    disabled={cartPending}
-                  >
-                    <FaShoppingCart className="product-cart-icon" />
-                    {inCart ? "В корзине ✓" : "Добавить в корзину"}
-                    {inCart && qty > 1 && (
-                      <span className="product-cart-qty">
-                        x{qty}
-                      </span>
-                    )}
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 

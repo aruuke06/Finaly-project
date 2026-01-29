@@ -1,50 +1,140 @@
-import React, { useState } from "react";
-import "../STYLES/like.css"
-import { PiShoppingCartSimpleFill } from "react-icons/pi";
-import { FaTrashAlt } from "react-icons/fa";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./like.css";
+import { FaTrash, FaShoppingCart } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { fetchProducts } from "../features/products/productsSlice";
+import {
+  removeFromWishlist,
+  clearWishlist,
+  selectWishlistIds,
+} from "../features/wishlist/wishlistSlice";
+import { addOneOptimistic, setCartPending } from "../store/cartSlice";
 
 export default function Like() {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      title: "Walnuts",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRhnAkZfhDC9c_et_PqUZwj88k3hYtQM8BvA&s",
-      fats: "65 g fats",
-      price: "$14.20",
-    },
-    
-  ]);
+  const dispatch = useAppDispatch();
+  const { items: allProducts, loading, error } = useAppSelector(
+    (state) => state.products
+  );
+  const wishlistIds = useAppSelector(selectWishlistIds);
 
-  const removeItem = (id) => {
-    setProducts((prev) => prev.filter((item) => item.id !== id));
+  useEffect(() => {
+    if (allProducts.length === 0 && !loading) {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, allProducts.length, loading]);
+
+  const wishlistItems = allProducts.filter((product) =>
+    wishlistIds.includes(Number(product.id))
+  );
+
+  const handleRemove = (id) => {
+    dispatch(removeFromWishlist(id));
+  };
+
+  const handleClear = () => {
+    if (window.confirm("Clear all items from wishlist?")) {
+      dispatch(clearWishlist());
+    }
+  };
+
+  const handleAddToCart = (id) => {
+    const numId = Number(id);
+    dispatch(setCartPending({ id: numId, pending: "add" }));
+    dispatch(addOneOptimistic(numId));
+    dispatch(setCartPending({ id: numId, pending: null }));
   };
 
   return (
-    <section className="like-wrapper">
-      {products.map((item) => (
-        <div className="like-card" key={item.id}>
-          
-          <div className="card-header">
-            <h5>{item.title}</h5>
-
+    <section className="wl">
+      <div className="wl__container">
+        <div className="wl__head">
+          <h1 className="wl__title">Wishlist</h1>
+          {wishlistItems.length > 0 && (
             <button
-              className="icon-btn delete"
-              onClick={() => removeItem(item.id)}
+              type="button"
+              className="wl__btn wl__btn--danger"
+              onClick={handleClear}
             >
-              <FaTrashAlt />
+              Clear
             </button>
-          </div>
-
-          <img src={item.img} alt={item.title} />
-
-          <h6>{item.fats}</h6>
-          <p className="price">{item.price}</p>
-
-          <button className="add-btn">
-            Add to cart <PiShoppingCartSimpleFill />
-          </button>
+          )}
         </div>
-      ))}
+
+        {error && (
+          <div className="wl__error">Error loading products: {error}</div>
+        )}
+
+        {loading && wishlistItems.length === 0 ? (
+          <div className="wl__loading">Loading wishlist...</div>
+        ) : wishlistItems.length === 0 ? (
+          <div className="wl__empty">
+            <p>Wishlist is empty</p>
+            <Link to="/shop" className="wl__btn wl__btn--primary">
+              Go to Shop
+            </Link>
+          </div>
+        ) : (
+          <div className="wl__grid">
+            {wishlistItems.map((product) => (
+              <div key={product.id} className="wl__card">
+                <div className="wl__imgWrap">
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt={product.title || "Product"}
+                      className="wl__img"
+                    />
+                  ) : (
+                    <div
+                      className="wl__img"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#999",
+                      }}
+                    >
+                      No image
+                    </div>
+                  )}
+                </div>
+
+                <div className="wl__body">
+                  <h3 className="wl__name">
+                    {product.title || "Untitled Product"}
+                  </h3>
+                  {product.category && (
+                    <span className="wl__cat">{product.category}</span>
+                  )}
+                  {product.price && (
+                    <p className="wl__price">{product.price}</p>
+                  )}
+
+                  <div className="wl__actions">
+                    <button
+                      type="button"
+                      className="wl__btn wl__btn--primary"
+                      onClick={() => handleAddToCart(product.id)}
+                    >
+                      <FaShoppingCart style={{ marginRight: "6px" }} />
+                      Добавить в корзину
+                    </button>
+                    <button
+                      type="button"
+                      className="wl__btn wl__btn--danger"
+                      onClick={() => handleRemove(Number(product.id))}
+                      aria-label="Remove from wishlist"
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </section>
   );
 }

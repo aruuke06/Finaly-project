@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import "../STYLES/cart.css";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const [items, setItems] = useState([
     {
       id: 1,
@@ -78,7 +80,11 @@ export default function Cart() {
               <span>${total.toFixed(2)}</span>
             </div>
 
-            <button className="checkout-btn">
+            <button
+              className="checkout-btn"
+              onClick={() => navigate("/checkout")}
+              disabled={items.length === 0}
+            >
               Checkout
             </button>
           </div>

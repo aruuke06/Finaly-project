@@ -63,6 +63,10 @@ const cartSlice = createSlice({
         delete state.pendingById[id];
       }
     },
+    clearCart(state) {
+      state.itemsById = {};
+      saveCartToStorage(state.itemsById);
+    },
   },
 });
 
@@ -70,6 +74,7 @@ export const {
   addOneOptimistic,
   removeOptimistic,
   setCartPending,
+  clearCart,
 } = cartSlice.actions;
 
 export const selectQty = (state, id) =>
