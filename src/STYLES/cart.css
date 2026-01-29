@@ -30,6 +30,20 @@
   margin: 0;
 }
 
+.cart-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.cart-empty p {
+  font-size: 18px;
+  color: #666;
+  margin: 0;
+}
+
 .cart-card {
   width: 100%;
   background: #fff;

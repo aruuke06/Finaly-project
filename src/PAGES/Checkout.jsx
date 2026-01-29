@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchProducts } from "../features/products/productsSlice";
-import { clearCart } from "../store/cartSlice";
+import {
+  clearCart,
+  selectCartItems,
+  selectCartTotal,
+} from "../features/cart/cartSlice";
 import "./checkout.css";
 
 function Checkout() {
@@ -11,7 +15,8 @@ function Checkout() {
   const { items: allProducts, loading } = useAppSelector(
     (state) => state.products
   );
-  const cartItemsById = useAppSelector((state) => state.cart.itemsById);
+  const cartItems = useAppSelector(selectCartItems);
+  const total = useAppSelector(selectCartTotal);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -26,26 +31,10 @@ function Checkout() {
     }
   }, [dispatch, allProducts.length, loading]);
 
-  const cartItems = Object.entries(cartItemsById)
-    .map(([id, { qty }]) => {
-      const product = allProducts.find((p) => Number(p.id) === Number(id));
-      if (!product) return null;
-      const price = parseFloat(product.price?.replace(/[^0-9.]/g, "") || "0");
-      return {
-        id: Number(id),
-        title: product.title,
-        image: product.image,
-        price: isNaN(price) ? 0 : price,
-        qty,
-      };
-    })
-    .filter(Boolean);
-
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
-  const total = subtotal;
+  const parsePrice = (price) => {
+    const num = parseFloat(String(price || "0").replace(/[^0-9.]/g, ""));
+    return isNaN(num) ? 0 : num;
+  };
 
   const isEmpty = cartItems.length === 0;
 
@@ -68,7 +57,8 @@ function Checkout() {
     }
     message += "\nТовары:\n";
     cartItems.forEach((item) => {
-      message += `- ${item.title} x ${item.qty}, $${item.price.toFixed(2)}\n`;
+      const price = parsePrice(item.price);
+      message += `- ${item.title} x ${item.qty}, $${price.toFixed(2)}\n`;
     });
     message += `\nИтого: $${total.toFixed(2)}`;
 
@@ -180,21 +170,17 @@ function Checkout() {
                         <div className="checkout-item-info">
                           <h4 className="checkout-item-title">{item.title}</h4>
                           <p className="checkout-item-price">
-                            ${item.price.toFixed(2)} x {item.qty}
+                            ${parsePrice(item.price).toFixed(2)} x {item.qty}
                           </p>
                         </div>
                         <p className="checkout-item-total">
-                          ${(item.price * item.qty).toFixed(2)}
+                          ${(parsePrice(item.price) * item.qty).toFixed(2)}
                         </p>
                       </div>
                     ))}
                   </div>
 
                   <div className="checkout-totals">
-                    <div className="checkout-total-row">
-                      <span>Подытог</span>
-                      <span>${subtotal.toFixed(2)}</span>
-                    </div>
                     <div className="checkout-total-row checkout-total-row--final">
                       <span>Итого</span>
                       <span>${total.toFixed(2)}</span>

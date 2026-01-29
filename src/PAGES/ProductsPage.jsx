@@ -14,7 +14,7 @@ function ProductsPage() {
 
   const handleDelete = (product) => {
     const confirmed = window.confirm(
-      `Are you sure you want to delete "${product.title}"? This action cannot be undone.`
+      `Вы уверены, что хотите удалить "${product.title}"? Это действие нельзя отменить.`
     );
     if (confirmed) {
       dispatch(deleteProduct(product.id));
@@ -39,7 +39,7 @@ function ProductsPage() {
           marginBottom: "24px",
         }}
       >
-        <h2>Admin Products</h2>
+        <h2>Товары</h2>
         <Link
           to="/admin/products/new"
           style={{
@@ -50,14 +50,14 @@ function ProductsPage() {
             borderRadius: "4px",
           }}
         >
-          Create New Product
+          Создать новый товар
         </Link>
       </div>
 
       <div style={{ marginBottom: "16px" }}>
         <input
           type="text"
-          placeholder="Search by title or category..."
+          placeholder="Поиск по названию или категории..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{
@@ -71,23 +71,23 @@ function ProductsPage() {
       </div>
 
       {error && (
-        <div style={{ color: "red", marginBottom: "16px" }}>Error: {error}</div>
+        <div style={{ color: "red", marginBottom: "16px" }}>Ошибка: {error}</div>
       )}
 
-      {loading && <div style={{ marginBottom: "16px" }}>Loading products...</div>}
+      {loading && <div style={{ marginBottom: "16px" }}>Загрузка...</div>}
 
       {!loading && !error && (
         <div className="table-wrap">
           <table className="table">
             <thead>
               <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th className="hide-mobile">Category</th>
-                <th>Price</th>
-                <th className="hide-mobile">Discount</th>
-                <th className="hide-mobile">Rating</th>
-                <th>Actions</th>
+                <th>Изображение</th>
+                <th>Название</th>
+                <th className="hide-mobile">Категория</th>
+                <th>Цена</th>
+                <th className="hide-mobile">Скидка</th>
+                <th className="hide-mobile">Рейтинг</th>
+                <th>Действия</th>
               </tr>
             </thead>
             <tbody>
@@ -101,7 +101,7 @@ function ProductsPage() {
                       color: "#666",
                     }}
                   >
-                    {searchQuery ? "No products match your search." : "No products found."}
+                    {searchQuery ? "Товары не найдены" : "Товары не найдены"}
                   </td>
                 </tr>
               ) : (
@@ -120,7 +120,7 @@ function ProductsPage() {
                           }}
                         />
                       ) : (
-                        <span style={{ color: "#999" }}>No image</span>
+                        <span style={{ color: "#999" }}>Нет изображения</span>
                       )}
                     </td>
                     <td>{product.title || "-"}</td>
@@ -141,7 +141,7 @@ function ProductsPage() {
                             fontSize: "14px",
                           }}
                         >
-                          Edit
+                          Редактировать
                         </Link>
                         <button
                           type="button"
@@ -157,7 +157,7 @@ function ProductsPage() {
                             fontSize: "14px",
                           }}
                         >
-                          Delete
+                          Удалить
                         </button>
                       </div>
                     </td>

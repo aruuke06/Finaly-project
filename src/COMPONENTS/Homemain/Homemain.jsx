@@ -17,12 +17,9 @@ import {
 } from "../../features/wishlist/wishlistSlice";
 
 import {
-  addOneOptimistic,
-  setCartPending,
-  selectQty,
-  selectInCart,
-  selectCartPendingById,
-} from "../../store/cartSlice";
+  addToCart,
+  selectCartItems,
+} from "../../features/cart/cartSlice";
 
 import { fetchProducts } from "../../features/products/productsSlice";
 
@@ -31,7 +28,6 @@ function Homemain() {
   const { items: allProducts, loading, error } = useAppSelector(
     (state) => state.products
   );
-  const cartPendingById = useAppSelector(selectCartPendingById);
 
   useEffect(() => {
     if (allProducts.length === 0 && !loading) {
@@ -39,10 +35,8 @@ function Homemain() {
     }
   }, [dispatch, allProducts.length, loading]);
 
-  const products = allProducts.slice(0, 4);
-
   const wishlistIds = useAppSelector(selectWishlistIds);
-  const cartState = useAppSelector((state) => state.cart);
+  const cartItems = useAppSelector(selectCartItems);
 
   return (
     <>
@@ -110,28 +104,33 @@ function Homemain() {
             </div>
           )}
 
-          {loading && products.length === 0 ? (
+          {loading && allProducts.length === 0 ? (
             <div style={{ textAlign: "center", padding: "40px", color: "#666" }}>
               Loading products...
             </div>
           ) : (
             <div className="products">
-              {products.map((product) => {
+              {allProducts.map((product) => {
                 const id = Number(product.id);
                 const inWishlist = wishlistIds.includes(id);
 
-                const inCart = !!cartState.itemsById[id];
-                const qty = cartState.itemsById[id]?.qty ?? 0;
-                const cartPending = !!cartPendingById[id];
+                const cartItem = cartItems.find((item) => item.id === id);
+                const inCart = !!cartItem;
+                const qty = cartItem?.qty ?? 0;
 
                 const handleWishlistClick = () => {
                   dispatch(toggleWishlist(id));
                 };
 
                 const handleAddToCartClick = () => {
-                  dispatch(setCartPending({ id, pending: "add" }));
-                  dispatch(addOneOptimistic(id));
-                  dispatch(setCartPending({ id, pending: null }));
+                  dispatch(
+                    addToCart({
+                      id: id,
+                      title: product.title || "Untitled Product",
+                      image: product.image || "",
+                      price: product.price || "0",
+                    })
+                  );
                 };
 
                 return (
@@ -190,7 +189,6 @@ function Homemain() {
                       type="button"
                       className="product-cart-btn"
                       onClick={handleAddToCartClick}
-                      disabled={cartPending}
                     >
                       <FaShoppingCart className="product-cart-icon" />
                       {inCart ? "В корзине ✓" : "Добавить в корзину"}

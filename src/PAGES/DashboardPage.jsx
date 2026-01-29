@@ -38,31 +38,31 @@ function DashboardPage() {
   return (
     <div className="dashboard">
       <div className="dashboard__header">
-        <h1>Admin Dashboard</h1>
+        <h1>Панель управления</h1>
         <div className="dashboard__actions">
           <Link to="/admin/products/new" className="btn btn-primary">
-            Create Product
+            Создать товар
           </Link>
           <Link to="/admin/products" className="btn btn-secondary">
-            View Products
+            Все товары
           </Link>
         </div>
       </div>
 
       {error && (
-        <div className="dashboard__error">Error loading products: {error}</div>
+        <div className="dashboard__error">Ошибка загрузки товаров: {error}</div>
       )}
 
       {loading && items.length === 0 ? (
-        <div className="dashboard__loading">Loading dashboard...</div>
+        <div className="dashboard__loading">Загрузка...</div>
       ) : (
         <>
       
 
           <div className="dashboard__section">
-            <h2>Latest Products</h2>
+            <h2>Последние товары</h2>
             {latestProducts.length === 0 ? (
-              <p>No products found.</p>
+              <p>Товары не найдены</p>
             ) : (
               <div className="latest-products">
                 {latestProducts.map((product) => (
@@ -95,7 +95,7 @@ function DashboardPage() {
                       to={`/admin/products/${product.id}/edit`}
                       className="btn btn-small"
                     >
-                      Edit
+                      Редактировать
                     </Link>
                   </div>
                 ))}

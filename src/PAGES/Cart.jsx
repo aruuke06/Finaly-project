@@ -1,44 +1,39 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import {
+  removeFromCart,
+  increaseQty,
+  decreaseQty,
+  selectCartItems,
+  selectCartTotal,
+} from "../features/cart/cartSlice";
 import "../STYLES/cart.css";
 
 export default function Cart() {
   const navigate = useNavigate();
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      title: "Pistachios",
-      price: 8,
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRx_29nGBqqif0N5yqR3k0GpJjOVOL-PkC5w&s",
-      qty: 1,
-    },
-    {
-      id: 2,
-      title: "Walnut",
-      price: 8.49,
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/W_Nuss_Gr_99.jpg/500px-W_Nuss_Gr_99.jpg",
-      qty: 2,
-    },
-  ]);
+  const dispatch = useAppDispatch();
+  const items = useAppSelector(selectCartItems);
+  const total = useAppSelector(selectCartTotal);
 
-  const increase = (id) => {
-    setItems(items.map(i =>
-      i.id === id ? { ...i, qty: i.qty + 1 } : i
-    ));
+  const isEmpty = items.length === 0;
+
+  const handleIncrease = (id) => {
+    dispatch(increaseQty(id));
   };
 
-  const decrease = (id) => {
-    setItems(items.map(i =>
-      i.id === id && i.qty > 1 ? { ...i, qty: i.qty - 1 } : i
-    ));
+  const handleDecrease = (id) => {
+    dispatch(decreaseQty(id));
   };
 
-  const removeItem = (id) => {
-    setItems(items.filter(i => i.id !== id));
+  const handleRemove = (id) => {
+    dispatch(removeFromCart(id));
   };
 
-  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const parsePrice = (price) => {
+    const num = parseFloat(String(price || "0").replace(/[^0-9.]/g, ""));
+    return isNaN(num) ? 0 : num;
+  };
 
   return (
     <div className="cart-page">
@@ -47,47 +42,59 @@ export default function Cart() {
 
         <div className="cart-wrapper">
           <div className="cart-items">
-            {items.map(item => (
-              <div className="cart-card" key={item.id}>
-                <img src={item.img} alt={item.title} />
-
-                <div className="cart-info">
-                  <h4>{item.title}</h4>
-                  <p className="price">${item.price.toFixed(2)}</p>
-
-                  <div className="qty-box">
-                    <button onClick={() => decrease(item.id)}>-</button>
-                    <span>{item.qty}</span>
-                    <button onClick={() => increase(item.id)}>+</button>
-                  </div>
-                </div>
-
-                <button
-                  className="remove-btn"
-                  onClick={() => removeItem(item.id)}
-                >
-                  <FaTrash />
-                </button>
+            {isEmpty ? (
+              <div className="cart-empty">
+                <p>Корзина пустая</p>
               </div>
-            ))}
+            ) : (
+              items.map((item) => (
+                <div className="cart-card" key={item.id}>
+                  {item.image && (
+                    <img src={item.image} alt={item.title} />
+                  )}
+
+                  <div className="cart-info">
+                    <h4>{item.title}</h4>
+                    <p className="price">
+                      ${parsePrice(item.price).toFixed(2)}
+                    </p>
+
+                    <div className="qty-box">
+                      <button onClick={() => handleDecrease(item.id)}>-</button>
+                      <span>{item.qty}</span>
+                      <button onClick={() => handleIncrease(item.id)}>+</button>
+                    </div>
+                  </div>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() => handleRemove(item.id)}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))
+            )}
           </div>
 
-          <div className="cart-summary">
-            <h3>Order Summary</h3>
+          {!isEmpty && (
+            <div className="cart-summary">
+              <h3>Order Summary</h3>
 
-            <div className="summary-row">
-              <span>Total</span>
-              <span>${total.toFixed(2)}</span>
+              <div className="summary-row">
+                <span>Total</span>
+                <span>${total.toFixed(2)}</span>
+              </div>
+
+              <button
+                className="checkout-btn"
+                onClick={() => navigate("/checkout")}
+                disabled={isEmpty}
+              >
+                Checkout
+              </button>
             </div>
-
-            <button
-              className="checkout-btn"
-              onClick={() => navigate("/checkout")}
-              disabled={items.length === 0}
-            >
-              Checkout
-            </button>
-          </div>
+          )}
         </div>
       </div>
     </div>

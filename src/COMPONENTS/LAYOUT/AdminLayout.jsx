@@ -9,10 +9,10 @@ function AdminLayout() {
       <div className="admin__container">
         <nav className="admin-nav">
           <NavLink to="/admin" end className="admin-nav__link">
-            Dashboard
+            Панель
           </NavLink>
           <NavLink to="/admin/products" className="admin-nav__link">
-            Products
+            Товары
           </NavLink>
         </nav>
         <Outlet />

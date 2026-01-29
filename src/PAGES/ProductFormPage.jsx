@@ -50,10 +50,10 @@ function ProductFormPage() {
   const validate = () => {
     const newErrors = {};
     if (!formData.title.trim()) {
-      newErrors.title = "Title is required";
+      newErrors.title = "Обязательное поле";
     }
     if (!formData.image.trim()) {
-      newErrors.image = "Image URL is required";
+      newErrors.image = "Обязательное поле";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -77,7 +77,7 @@ function ProductFormPage() {
       navigate("/admin/products");
     } catch (error) {
       console.error("Failed to save product:", error);
-      alert(`Failed to save product: ${error.message || "Unknown error"}`);
+      alert(`Не удалось сохранить товар: ${error.message || "Неизвестная ошибка"}`);
     } finally {
       setSaving(false);
     }
@@ -86,7 +86,7 @@ function ProductFormPage() {
   return (
     <div style={{ padding: "24px", maxWidth: "600px", margin: "0 auto" }}>
       <h2 style={{ marginBottom: "24px" }}>
-        {isEditMode ? "Edit Product" : "Create New Product"}
+        {isEditMode ? "Редактировать товар" : "Создать новый товар"}
       </h2>
 
       <form onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ function ProductFormPage() {
             htmlFor="title"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Title <span style={{ color: "red" }}>*</span>
+            Название <span style={{ color: "red" }}>*</span>
           </label>
           <input
             type="text"
@@ -122,7 +122,7 @@ function ProductFormPage() {
             htmlFor="image"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Image URL <span style={{ color: "red" }}>*</span>
+            Ссылка на изображение <span style={{ color: "red" }}>*</span>
           </label>
           <input
             type="text"
@@ -166,7 +166,7 @@ function ProductFormPage() {
             htmlFor="category"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Category
+            Категория
           </label>
           <input
             type="text"
@@ -188,7 +188,7 @@ function ProductFormPage() {
             htmlFor="price"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Price
+            Цена
           </label>
           <input
             type="text"
@@ -210,7 +210,7 @@ function ProductFormPage() {
             htmlFor="discount"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Discount
+            Скидка
           </label>
           <input
             type="text"
@@ -232,7 +232,7 @@ function ProductFormPage() {
             htmlFor="rating"
             style={{ display: "block", marginBottom: "4px", fontWeight: "500" }}
           >
-            Rating
+            Рейтинг
           </label>
           <input
             type="text"
@@ -263,7 +263,7 @@ function ProductFormPage() {
               fontSize: "16px",
             }}
           >
-            {saving ? "Saving..." : isEditMode ? "Save Changes" : "Create Product"}
+            {saving ? "Сохранение..." : isEditMode ? "Сохранить изменения" : "Создать товар"}
           </button>
           <button
             type="button"
@@ -279,7 +279,7 @@ function ProductFormPage() {
               fontSize: "16px",
             }}
           >
-            Cancel
+            Отмена
           </button>
         </div>
       </form>

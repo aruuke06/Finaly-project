@@ -9,7 +9,7 @@ import {
   clearWishlist,
   selectWishlistIds,
 } from "../features/wishlist/wishlistSlice";
-import { addOneOptimistic, setCartPending } from "../store/cartSlice";
+import { addToCart } from "../features/cart/cartSlice";
 
 export default function Like() {
   const dispatch = useAppDispatch();
@@ -38,11 +38,15 @@ export default function Like() {
     }
   };
 
-  const handleAddToCart = (id) => {
-    const numId = Number(id);
-    dispatch(setCartPending({ id: numId, pending: "add" }));
-    dispatch(addOneOptimistic(numId));
-    dispatch(setCartPending({ id: numId, pending: null }));
+  const handleAddToCart = (product) => {
+    dispatch(
+      addToCart({
+        id: Number(product.id),
+        title: product.title || "Untitled Product",
+        image: product.image || "",
+        price: product.price || "0",
+      })
+    );
   };
 
   return (
@@ -112,11 +116,11 @@ export default function Like() {
                   )}
 
                   <div className="wl__actions">
-                    <button
-                      type="button"
-                      className="wl__btn wl__btn--primary"
-                      onClick={() => handleAddToCart(product.id)}
-                    >
+                  <button
+                    type="button"
+                    className="wl__btn wl__btn--primary"
+                    onClick={() => handleAddToCart(product)}
+                  >
                       <FaShoppingCart style={{ marginRight: "6px" }} />
                       Добавить в корзину
                     </button>
