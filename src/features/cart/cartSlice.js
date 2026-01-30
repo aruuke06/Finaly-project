@@ -29,7 +29,7 @@ const saveCartToStorage = (items) => {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   } catch {
-    // ignore storage errors
+    
   }
 };
 

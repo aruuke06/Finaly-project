@@ -13,13 +13,13 @@ function DashboardPage() {
     }
   }, [dispatch, items.length, loading]);
 
-  const totalProducts = items.length;
+  // const totalProducts = items.length;
 
-  const uniqueCategories = new Set(
-    items.map((item) => item.category).filter(Boolean)
-  ).size;
+  // const uniqueCategories = new Set(
+  //   items.map((item) => item.category).filter(Boolean)
+  // ).size;
 
-  const latestProduct = items.length > 0 ? items[items.length - 1] : null;
+  // const latestProduct = items.length > 0 ? items[items.length - 1] : null;
 
   const categoryCounts = {};
   items.forEach((item) => {
@@ -28,10 +28,10 @@ function DashboardPage() {
     }
   });
 
-  const topCategories = Object.entries(categoryCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3)
-    .map(([category, count]) => ({ category, count }));
+  // const topCategories = Object.entries(categoryCounts)
+  //   .sort((a, b) => b[1] - a[1])
+  //   .slice(0, 3)
+  //   .map(([category, count]) => ({ category, count }));
 
   const latestProducts = items.slice(-5).reverse();
 
