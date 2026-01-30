@@ -75,7 +75,6 @@ export default function Header() {
           </NavLink>
         </div>
 
-        {/* Burger Button - Mobile Only */}
         <button
           className="burger-btn"
           onClick={toggleDrawer}
@@ -90,12 +89,10 @@ export default function Header() {
 
       </div>
 
-      {/* Overlay */}
       {isDrawerOpen && (
         <div className="drawer-overlay" onClick={closeDrawer} aria-hidden="true"></div>
       )}
 
-      {/* Mobile Drawer */}
       <nav
         id="mobile-drawer"
         className={`mobile-drawer ${isDrawerOpen ? "open" : ""}`}
